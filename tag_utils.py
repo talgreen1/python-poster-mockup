@@ -7,11 +7,14 @@ from exif import Image
 # https://pypi.org/project/exif/
 
 my_image = Image('./photos/test_template.jpg')
-my_image.make = "Python"
+my_image.make = "Python1"
 my_image.tal = 'Tal'
+my_image.set("tal", "EXIF Package")
+
+# my_image.xp_comment
 
 
-with open('./photos/test_template.jpg', 'wb') as new_image_file:
+with open('./photos/test_template2.jpg', 'wb') as new_image_file:
     new_image_file.write(my_image.get_file())
 
 

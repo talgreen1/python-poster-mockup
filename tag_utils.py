@@ -1,20 +1,20 @@
-from PIL import ImageChops
-from PIL import Image, ExifTags
-from PIL.ExifTags import TAGS
-import piexif
+# from PIL import ImageChops
+# from PIL import Image, ExifTags
+# from PIL.ExifTags import TAGS
+# import piexif
 from exif import Image
 
 # https://pypi.org/project/exif/
 
 my_image = Image('./photos/test_template.jpg')
-my_image.make = "Python1"
-my_image.tal = 'Tal'
-my_image.set("tal", "EXIF Package")
+# my_image.make = "Python1"
+# my_image.tal = 'Tal'
+my_image.set("tal", "xp_comment")
 
-# my_image.xp_comment
+my_image.xp_comment = "My Comment"
 
 
-with open('./photos/test_template2.jpg', 'wb') as new_image_file:
+with open('./photos/test_template1.jpg', 'wb') as new_image_file:
     new_image_file.write(my_image.get_file())
 
 

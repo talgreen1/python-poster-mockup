@@ -1,91 +1,36 @@
-# from PIL import ImageChops
-# from PIL import Image, ExifTags
-# from PIL.ExifTags import TAGS
-# import piexif
-from exif import Image
+import json
 
-# https://pypi.org/project/exif/
+from PIL import Image
 
-my_image = Image('./photos/test_template.jpg')
-# my_image.make = "Python1"
-# my_image.tal = 'Tal'
-my_image.set("tal", "xp_comment")
-
-my_image.xp_comment = "My Comment"
+import placeholder
+from params import XP_COMMENT
+from placeholder import Placeholder
 
 
-with open('./photos/test_template1.jpg', 'wb') as new_image_file:
-    new_image_file.write(my_image.get_file())
+def add_comments(image_path, description):
+    image = Image.open(image_path)
+
+    exif_data = image.getexif()
+    exif_data[XP_COMMENT] = description.encode("utf16")
+
+    image.save(image_path, exif=exif_data)
 
 
+def get_comment(image_page):
+    image = Image.open(image_page)
 
-print(my_image.make)
+    exif_data = image.getexif()
 
-#
-# def extract_tag(image_path: str):
-#     image = Image.open(image_path)
-#     info_dict = {
-#         "Filename": image.filename,
-#         "Image Size": image.size,
-#         "Image Height": image.height,
-#         "Image Width": image.width,
-#         "Image Format": image.format,
-#         "Image Mode": image.mode,
-#         "Image is Animated": getattr(image, "is_animated", False),
-#         "Frames in Image": getattr(image, "n_frames", 1)
-#     }
-#
-#     for label, value in info_dict.items():
-#         print(f"{label:25}: {value}")
-#
-#     exifdata = image.getexif()
-#
-#     for tag_id in exifdata:
-#         # get the tag name, instead of human unreadable tag id
-#         tag = TAGS.get(tag_id, tag_id)
-#         data = exifdata.get(tag_id)
-#         # decode bytes
-#         if isinstance(data, bytes):
-#             data = data.decode()
-#         print(f"{tag:25}: {data}")
-#
-#
-#
-#
-# def save_tags(image_path: str):
-#     metadata = {
-#         'Author': 'John Doe',
-#         'Description': 'A beautiful landscape',
-#         'Location': 'New York'
-#     }
-#
-#     image = Image.open(image_path)
-#     image.info.update(metadata)
-#
-#     # Save the image with metadata
-#     image.save(image_path)
-#     pass
-#
-# # save_tags('./photos/test_template.jpg')
-# # extract_tag('./photos/test_template.jpg')
-#
-#
-# def write_metadata_to_jpg(image_path, metadata):
-#     exif_dict = piexif.load(image_path)
-#
-#     # Convert metadata to EXIF format
-#     exif_bytes = piexif.dump({"Exif": metadata})
-#
-#     # Update the EXIF data in the image
-#     piexif.insert(exif_bytes, image_path)
-#
-# # Usage example:
-# jpg_file = './photos/test_template.jpg'
-# metadata = {
-#     piexif.ExifIFD.UserComment: "This is a comment.",
-#     piexif.ImageIFD.Make: "Camera Manufacturer",
-#     piexif.ImageIFD.Model: "Camera Model",
-#     piexif.ImageIFD.Software: "Image Editing Software"
-# }
-#
-# write_metadata_to_jpg(jpg_file, metadata)
+    return exif_data[XP_COMMENT].decode('utf16')
+
+
+def add_placeholders(placeholders):
+    placeholders_inner_json = json.dumps(placeholders)
+    print(placeholders_inner_json)
+    pass
+
+p1 = Placeholder(x=1,y=2, width=3, height=4)
+p2 = Placeholder(x=5,y=6, width=7, height=8)
+lst = [p1,p2]
+add_placeholders(lst)
+

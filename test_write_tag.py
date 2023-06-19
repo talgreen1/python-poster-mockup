@@ -44,11 +44,13 @@ def find_placeholders_in_comment_text(comment:str):
     return comment[start_index+len(PLACEHOLDERS_TEMPLATE_START):end_index ]
 
 
-# Test comment: This is some comments.... placeholders:<<{"placeholders": [{"x": 1, "y": 2, "high": 3, "width": 4}, {"x": 5, "y": 6, "high": 7, "width": 8}]}>>
+test_comment = 'This is some comments.... placeholders:<<{"placeholders": [{"x": 1, "y": 2, "high": 3, "width": 4}, {"x": 5, "y": 6, "high": 7, "width": 8}]}>>'
+a = find_placeholders_in_comment_text(test_comment)
+print(a)
 
 
-p1 = {'x': 1, 'y': 2, 'high': 3, 'width': 4}
-p2 = {'x': 5, 'y': 6, 'high': 7, 'width': 8}
-write_placeholders([p1, p2], None)
-# add_description('./photos/template.jpg', 'New desk')
-# print(get_comment('./photos/template.jpg'))
+# p1 = {'x': 1, 'y': 2, 'high': 3, 'width': 4}
+# p2 = {'x': 5, 'y': 6, 'high': 7, 'width': 8}
+# write_placeholders([p1, p2], None)
+# # add_description('./photos/template.jpg', 'New desk')
+# # print(get_comment('./photos/template.jpg'))

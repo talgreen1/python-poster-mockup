@@ -1,9 +1,10 @@
 XP_COMMENT = 0x9C9C
-PLACEHOLDERS = 'placeholders:'
+PLACEHOLDERS_TEMPLATE_START = 'placeholders:<<'
+PLACEHOLDERS_TEMPLATE_END = '>>'
+PLACEHOLDERS_TEMPLATE = PLACEHOLDERS_TEMPLATE_START + '{json}' + PLACEHOLDERS_TEMPLATE_END
 PLACEHOLDERS_JSON = {
-    'placeholders':[]
+    'placeholders': []
 }
-
 
 # PLACEHOLDER = {'x': None, 'y': None, 'high': None, 'width': None}
 #

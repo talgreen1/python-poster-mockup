@@ -1,36 +1,50 @@
-import json
-
 from PIL import Image
 
-import placeholder
-from params import XP_COMMENT
+from params import PLACEHOLDERS_JSON, XP_COMMENT, PLACEHOLDERS_TEMPLATE, PLACEHOLDERS_TEMPLATE_START, \
+    PLACEHOLDERS_TEMPLATE_END
 from placeholder import Placeholder
 
+import json
 
-def add_comments(image_path, description):
+def write_comment(image_path, comment):
     image = Image.open(image_path)
+    # XPComment = 0x9C9C
+    exifdata = image.getexif()
+    exifdata[XP_COMMENT] = comment.encode("utf16")
 
-    exif_data = image.getexif()
-    exif_data[XP_COMMENT] = description.encode("utf16")
+    image.save(image_path, exif=exifdata)
 
-    image.save(image_path, exif=exif_data)
 
 
 def get_comment(image_page):
     image = Image.open(image_page)
 
-    exif_data = image.getexif()
+    # XPComment = 0x9C9C
 
-    return exif_data[XP_COMMENT].decode('utf16')
+    exifdata = image.getexif()
+
+    return exifdata[XP_COMMENT].decode('utf16')
 
 
-def add_placeholders(placeholders):
-    placeholders_inner_json = json.dumps(placeholders)
-    print(placeholders_inner_json)
-    pass
+def write_placeholders(placeholders: [Placeholder], image_path: str):
+    PLACEHOLDERS_JSON['placeholders'] = placeholders
+    placeholders_json = json.dumps(PLACEHOLDERS_JSON)
 
-p1 = Placeholder(x=1,y=2, width=3, height=4)
-p2 = Placeholder(x=5,y=6, width=7, height=8)
-lst = [p1,p2]
-add_placeholders(lst)
+    placeholder_comment = PLACEHOLDERS_TEMPLATE.format(json=placeholders_json)
+
+    write_comment(image_path, placeholder_comment)
+
+
+def find_placeholders_in_comment_text(comment: str):
+    start_index = comment.find(PLACEHOLDERS_TEMPLATE_START)
+    if start_index == -1:
+        return None
+
+    end_index = comment.find(PLACEHOLDERS_TEMPLATE_END, start_index)
+    return comment[start_index + len(PLACEHOLDERS_TEMPLATE_START):end_index]
+
+
+def remove_placeholders_in_comment_text(comment: str):
+    text_to_del = find_placeholders_in_comment_text(comment=comment)
+    return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START+PLACEHOLDERS_TEMPLATE_END,'')
 

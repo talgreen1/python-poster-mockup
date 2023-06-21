@@ -35,19 +35,23 @@ def write_placeholders(placeholders: [Placeholder], image_path: str):
     write_comment(image_path, placeholder_comment)
 
 
-def find_placeholders_in_comment_text(comment:str):
+def find_placeholders_in_comment_text(comment: str):
     start_index = comment.find(PLACEHOLDERS_TEMPLATE_START)
     if start_index == -1:
         return None
 
-    end_index = comment.find(PLACEHOLDERS_TEMPLATE_END,start_index )
-    return comment[start_index+len(PLACEHOLDERS_TEMPLATE_START):end_index ]
+    end_index = comment.find(PLACEHOLDERS_TEMPLATE_END, start_index)
+    return comment[start_index + len(PLACEHOLDERS_TEMPLATE_START):end_index]
+
+
+def remove_placeholders_in_comment_text(comment: str):
+    text_to_del = find_placeholders_in_comment_text(comment=comment)
+    return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START+PLACEHOLDERS_TEMPLATE_END,'')
 
 
 test_comment = 'This is some comments.... placeholders:<<{"placeholders": [{"x": 1, "y": 2, "high": 3, "width": 4}, {"x": 5, "y": 6, "high": 7, "width": 8}]}>>'
-a = find_placeholders_in_comment_text(test_comment)
+a = remove_placeholders_in_comment_text(test_comment)
 print(a)
-
 
 # p1 = {'x': 1, 'y': 2, 'high': 3, 'width': 4}
 # p2 = {'x': 5, 'y': 6, 'high': 7, 'width': 8}

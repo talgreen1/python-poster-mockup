@@ -7,6 +7,6 @@ def parse_args():
                         help='Path for the mock image')
 
     args = parser.parse_args()
-    print(args.accumulate(args.integers))\
+    print(args.action)
 
 parse_args()

@@ -59,8 +59,8 @@ def get_placeholders(image_path:str):
         if placeholders:
             placeholders_json = json.loads(placeholders)['placeholders']
             for p in placeholders_json:
+                print(p)
 
-            print(placeholders)
     else:
         return None
 

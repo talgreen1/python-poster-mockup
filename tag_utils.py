@@ -36,8 +36,8 @@ def write_placeholders(image_path: str, placeholders: [Placeholder]):
 
 
 
-    placeholders_json = json.dumps(PLACEHOLDERS_JSON).replace('\\','') #todo: debug here
-
+    # placeholders_json = json.dumps(PLACEHOLDERS_JSON).replace('\\','') #todo: debug here
+    placeholders_json = json.dumps(PLACEHOLDERS_JSON, default=lambda o: o.__dict__)
     placeholder_comment = PLACEHOLDERS_TEMPLATE.format(json=placeholders_json)
 
     write_comment(image_path, placeholder_comment)

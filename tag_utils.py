@@ -24,6 +24,9 @@ def get_comment(image_page):
 
     exifdata = image.getexif()
 
+    if XP_COMMENT not in exifdata:
+        return None
+
     return exifdata[XP_COMMENT].decode('utf16')
 
 
@@ -33,7 +36,7 @@ def write_placeholders(image_path: str, placeholders: [Placeholder]):
 
 
 
-    placeholders_json = json.dumps(PLACEHOLDERS_JSON).replace('\\','')
+    placeholders_json = json.dumps(PLACEHOLDERS_JSON).replace('\\','') #todo: debug here
 
     placeholder_comment = PLACEHOLDERS_TEMPLATE.format(json=placeholders_json)
 
@@ -51,7 +54,10 @@ def find_placeholders_in_comment_text(comment: str):
 
 def get_placeholder(image_path:str):
     comment = get_comment(image_path)
-    return find_placeholders_in_comment_text(comment)
+    if comment:
+        return find_placeholders_in_comment_text(comment)
+    else:
+        return None
 
 def remove_placeholders_in_comment_text(comment: str):
     text_to_del = find_placeholders_in_comment_text(comment=comment)

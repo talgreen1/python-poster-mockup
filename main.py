@@ -26,7 +26,7 @@ def set_placeholder(image_path: str, placeholder_list_string):
         placeholder_params_list = [p.split(',') for p in placeholder_params_list]
         for placeholder in placeholder_params_list:
             kwargs = dict(zip(Placeholder.get_init_param_names(), placeholder))
-            placeholder_list.append(Placeholder(**kwargs).get_json())
+            placeholder_list.append(Placeholder(**kwargs).toJSON())
 
         write_placeholders(image_path=image_path, placeholders=placeholder_list)
 
@@ -34,4 +34,4 @@ def set_placeholder(image_path: str, placeholder_list_string):
 # if __name__ == "__main__":
 #     app()
 print_placeholder(u'./photos/template.jpg')
-set_placeholder(u'./photos/template.jpg', '1,2,3, 4;5,6,7,8')
+# set_placeholder(u'./photos/template.jpg', '1,2,3, 4;5,6,7,8')

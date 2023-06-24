@@ -44,6 +44,10 @@ def find_placeholders_in_comment_text(comment: str):
     return comment[start_index + len(PLACEHOLDERS_TEMPLATE_START):end_index]
 
 
+def get_placeholder(image_path:str):
+    comment = get_comment(image_path)
+    return find_placeholders_in_comment_text(comment)
+
 def remove_placeholders_in_comment_text(comment: str):
     text_to_del = find_placeholders_in_comment_text(comment=comment)
     return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START+PLACEHOLDERS_TEMPLATE_END,'')

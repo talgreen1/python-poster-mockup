@@ -1,19 +1,9 @@
 # import argparse
 import typer
 
-from tag_utils import get_placeholder
+from placeholder import Placeholder
+from tag_utils import get_placeholder, write_placeholders
 
-# def parse_args():
-#     parser = argparse.ArgumentParser(description='Process some integers.')
-#     parser.add_argument('-action', required=True, help='Available Options: save_placeholders')
-#     parser.add_argument('-placeholders', required=False, help='list of placeholders details for the mock image.')
-#     parser.add_argument('-mock_image_path', type=str,
-#                         help='Path for the mock image')
-#
-#     args = parser.parse_args()
-#     print(args.action)
-
-# parse_args()
 app = typer.Typer()
 
 
@@ -22,5 +12,26 @@ def print_placeholder(image_path: str):
     print(get_placeholder(image_path))
 
 
-if __name__ == "__main__":
-    app()
+@app.command()
+def set_placeholder(image_path: str, placeholder_list_string):
+    current_placeholder = get_placeholder(image_path)
+    if current_placeholder:
+        print(f'There are placeholder in this photo. Do you want to override?')
+        answer = input('Type "Yes"')
+        if answer.lower() == 'yes':
+            pass  # todo - write the placeholders
+    else:
+        placeholder_list = []
+        placeholder_params_list = placeholder_list_string.split(';')
+        placeholder_params_list = [p.split(',') for p in placeholder_params_list]
+        for placeholder in placeholder_params_list:
+            kwargs = dict(zip(Placeholder.get_init_param_names(), placeholder))
+            placeholder_list.append(Placeholder(**kwargs).get_json())
+
+        write_placeholders(image_path=image_path, placeholders=placeholder_list)
+
+
+# if __name__ == "__main__":
+#     app()
+print_placeholder(u'./photos/template.jpg')
+set_placeholder(u'./photos/template.jpg', '1,2,3, 4;5,6,7,8')

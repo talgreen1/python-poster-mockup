@@ -1,4 +1,5 @@
 from PIL import Image
+import jsonpickle
 
 from params import PLACEHOLDERS_JSON, XP_COMMENT, PLACEHOLDERS_TEMPLATE, PLACEHOLDERS_TEMPLATE_START, \
     PLACEHOLDERS_TEMPLATE_END
@@ -26,8 +27,12 @@ def get_comment(image_page):
     return exifdata[XP_COMMENT].decode('utf16')
 
 
-def write_placeholders(placeholders: [Placeholder], image_path: str):
+def write_placeholders(image_path: str, placeholders: [Placeholder]):
     PLACEHOLDERS_JSON['placeholders'] = placeholders
+
+
+
+
     placeholders_json = json.dumps(PLACEHOLDERS_JSON)
 
     placeholder_comment = PLACEHOLDERS_TEMPLATE.format(json=placeholders_json)

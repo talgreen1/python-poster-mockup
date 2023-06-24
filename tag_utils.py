@@ -52,10 +52,15 @@ def find_placeholders_in_comment_text(comment: str):
     return comment[start_index + len(PLACEHOLDERS_TEMPLATE_START):end_index]
 
 
-def get_placeholder(image_path:str):
+def get_placeholders(image_path:str):
     comment = get_comment(image_path)
     if comment:
-        return find_placeholders_in_comment_text(comment)
+        placeholders = find_placeholders_in_comment_text(comment)
+        if placeholders:
+            placeholders_json = json.loads(placeholders)['placeholders']
+            for p in placeholders_json:
+
+            print(placeholders)
     else:
         return None
 

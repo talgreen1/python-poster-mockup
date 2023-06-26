@@ -57,9 +57,8 @@ def get_placeholders(image_path:str):
     if comment:
         placeholders = find_placeholders_in_comment_text(comment)
         if placeholders:
-            placeholders_json = json.loads(placeholders)['placeholders']
-            for p in placeholders_json:
-                print(p)
+            placeholders_list = json.loads(placeholders)['placeholders']
+            return [Placeholder(**p) for p in  placeholders_list]
 
     else:
         return None

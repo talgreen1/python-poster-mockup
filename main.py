@@ -7,6 +7,7 @@ from tag_utils import get_placeholders, write_placeholders
 
 app = typer.Typer()
 
+# 480.5,601,445,630;1128.5,600,445,630
 
 # @app.command()
 # def print_placeholders(image_path: str = Annotated[str, typer.Option("--image-path", "-i")]):
@@ -22,7 +23,7 @@ def print_placeholders(image_path: Annotated[str, typer.Option("--image-path", "
 
 @app.command()
 def set_placeholders(image_path: Annotated[str, typer.Option("--image-path", "-i", help="A full path to the image file.")],
-                     placeholder_list_string: Annotated[str, typer.Option("--placeholders", "-p", help="A list of placeholders")]):
+                     placeholder_list_string: Annotated[str, typer.Option("--placeholders", "-p", help='A list of placeholders. A placeholder is set of 4 numbers: x,y,width and height,comma seperated. If you have more then 1 placeholder, seperate them with  ";" For example: "480.5,601,445,630;1128.5,600,445,630". Placeholders text must be inside " "')]):
     '''
     Set placeholder(s) to an image
     '''

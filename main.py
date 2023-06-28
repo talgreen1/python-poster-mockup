@@ -64,10 +64,10 @@ def add_image_to_mockup(mockup_path: Annotated[str, typer.Option("--mockup-path"
                         output_image_path: Annotated[str, typer.Option("--output-image-path", "-o",
                                                                        help="full path to the output image (the result image)")],
                         mockup_index: Annotated[str, typer.Option("--image-path", "-i",
-                                                                  help="The index of the placeholder inside the mockup path, incase there are more than one placeholder")] = "0",
+                                                                  help="The index of the placeholder inside the mockup path, incase there are more than one placeholder")] = 0,
                         ):
     placeholders = get_placeholders(mockup_path)
-    insert_image_to_mockup(mock_image_path=mockup_path, insert_image_path=image_path, placeholder=placeholders[0],
+    insert_image_to_mockup(mock_image_path=mockup_path, insert_image_path=image_path, placeholder=placeholders[mockup_index],
                            output_image_path=output_image_path)
 
 
@@ -78,9 +78,11 @@ background_image_path = './photos/template.jpg'  # Path to the background image
 insert_image_path = './photos/item1.png'  # Path to the image to be inserted (with alpha channel)
 output_image_path = './photos/output.jpg'  # Path to save the resulting image
 
-
-add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
-                    output_image_path="./photos/output.jpg")
+# add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
+#                     output_image_path="./photos/output.jpg")
 
 # print_placeholder(u'./photos/template.jpg')
-# set_placeholders(u'./photos/template.jpg', '480.5,601,445,630;1128.5,600,445,630')
+set_placeholders(u'./photos/template.jpg', '259,286,445,630;906,286,445,630')
+add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
+                    output_image_path="./photos/output.jpg", mockup_index=1)
+

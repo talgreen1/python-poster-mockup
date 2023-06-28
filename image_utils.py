@@ -8,8 +8,8 @@ def insert_image_to_mockup(mock_image_path, insert_image_path, output_image_path
     background_image = Image.open(mock_image_path)
     insert_image = Image.open(insert_image_path)
     insert_image_new_size = (int(placeholder.width), int(placeholder.height))
-    # insert_image_position = (int(placeholder.x), int(placeholder.y))
-    insert_image_position = (100,0)
+    insert_image_position = (int(placeholder.x), int(placeholder.y))
+    # insert_image_position = (100,0)
 
     insert_image = insert_image.resize(insert_image_new_size)
     # insert_image_alpha = insert_image.convert("RGBA")

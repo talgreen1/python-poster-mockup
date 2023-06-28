@@ -45,6 +45,12 @@ def set_placeholders(image_path: Annotated[str, typer.Option("--image-path", "-i
     write_placeholders(image_path=image_path, placeholders=placeholder_list)
 
 
+
+def add_image_to_mockup(mockup_path:Annotated[str, typer.Option("--mockup-path", "-i", help="A full path to the mockup image - The image that contains the placeholders")],
+                        image_path: Annotated[str, typer.Option("--image-path", "-i", help="A full path to an image file, that should be added to the mockup image")],
+                        mockup_index: Annotated[str, typer.Option("--image-path", "-i", help="The index of the placeholder inside the mockup path, incase there are more than one placeholder")]):
+    pass
+
 if __name__ == "__main__":
     app()
 

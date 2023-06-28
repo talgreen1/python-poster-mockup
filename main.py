@@ -82,7 +82,7 @@ output_image_path = './photos/output.jpg'  # Path to save the resulting image
 #                     output_image_path="./photos/output.jpg")
 
 # print_placeholder(u'./photos/template.jpg')
-set_placeholders(u'./photos/template.jpg', '259,286,445,630;906,286,445,630')
+# set_placeholders(u'./photos/template.jpg', '259,286,445,630;906,286,445,630')
 add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
                     output_image_path="./photos/output.jpg", mockup_index=1)
 

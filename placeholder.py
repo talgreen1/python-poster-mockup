@@ -3,10 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class Placeholder():
-    x: int
-    y: int
-    width: int
-    height: int
+    x: float
+    y: float
+    width: float
+    height: float
 
     def get_json(self):
         return f'{{"x": {self.x}, "y": {self.y}, "height": {self.height}, "width": {self.width}}}'

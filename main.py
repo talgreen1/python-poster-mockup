@@ -91,3 +91,5 @@ def add_image_to_mockup(mockup_path: Annotated[str, typer.Option("--mockup-path"
 insert_images_to_mockup(mock_image_path='./photos/template.jpg',
                         insert_images_path=['./photos/item1.png', './photos/item2.png'],
                         output_image_path="./photos/output.jpg")
+
+#{counter:02d}-Mockup{counter}

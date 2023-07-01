@@ -7,6 +7,7 @@ from placeholder import Placeholder
 
 import json
 
+
 def write_comment(image_path, comment):
     image = Image.open(image_path)
     # XPComment = 0x9C9C
@@ -14,7 +15,6 @@ def write_comment(image_path, comment):
     exifdata[XP_COMMENT] = comment.encode("utf16")
 
     image.save(image_path, exif=exifdata)
-
 
 
 def get_comment(image_page):
@@ -33,9 +33,6 @@ def get_comment(image_page):
 def write_placeholders(image_path: str, placeholders: [Placeholder]):
     PLACEHOLDERS_JSON['placeholders'] = placeholders
 
-
-
-
     # placeholders_json = json.dumps(PLACEHOLDERS_JSON).replace('\\','') #todo: debug here
     placeholders_json = json.dumps(PLACEHOLDERS_JSON, default=lambda o: o.__dict__)
     placeholder_comment = PLACEHOLDERS_TEMPLATE.format(json=placeholders_json)
@@ -52,18 +49,18 @@ def find_placeholders_in_comment_text(comment: str):
     return comment[start_index + len(PLACEHOLDERS_TEMPLATE_START):end_index]
 
 
-def get_placeholders(image_path:str):
+def get_placeholders(image_path: str):
     comment = get_comment(image_path)
     if comment:
         placeholders = find_placeholders_in_comment_text(comment)
         if placeholders:
             placeholders_list = json.loads(placeholders)['placeholders']
-            return [Placeholder(**p) for p in  placeholders_list]
+            return [Placeholder(**p) for p in placeholders_list]
 
     else:
         return None
 
+
 def remove_placeholders_in_comment_text(comment: str):
     text_to_del = find_placeholders_in_comment_text(comment=comment)
-    return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START+PLACEHOLDERS_TEMPLATE_END,'')
-
+    return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START + PLACEHOLDERS_TEMPLATE_END, '')

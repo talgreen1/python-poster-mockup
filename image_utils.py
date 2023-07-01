@@ -2,6 +2,7 @@ from PIL import ImageChops
 from PIL import Image
 
 from placeholder import Placeholder
+from tag_utils import get_placeholders
 
 
 def insert_image_to_mockup(mock_image_path, insert_image_path, output_image_path, placeholder: Placeholder):
@@ -16,6 +17,29 @@ def insert_image_to_mockup(mock_image_path, insert_image_path, output_image_path
     background_image.paste(insert_image, insert_image_position)
     background_image.save(output_image_path)
 
+
+def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_image_path):
+    placeholders = get_placeholders(mock_image_path)
+    background_image = Image.open(mock_image_path)
+
+    if not insert_images_path:
+        return
+
+    for placeholder in placeholders:
+        if not insert_images_path:
+            break
+
+        insert_image_path = insert_images_path.pop(0)
+        insert_image = Image.open(insert_image_path)
+        insert_image_new_size = (int(placeholder.width), int(placeholder.height))
+        insert_image_position = (int(placeholder.x), int(placeholder.y))
+        # insert_image_position = (100,0)
+
+        insert_image = insert_image.resize(insert_image_new_size)
+        # insert_image_alpha = insert_image.convert("RGBA")
+        background_image.paste(insert_image, insert_image_position)
+
+    background_image.save(output_image_path)
 
 # Example usage
 # background_image_path = './photos/template.jpg'  # Path to the background image

@@ -36,9 +36,9 @@ def resize_and_insert_image(background_image_path, insert_image_path, output_ima
 
 
 # Example usage
-background_image_path = './photos/template.jpg'  # Path to the background image
-insert_image_path = './photos/item1.png'  # Path to the image to be inserted (with alpha channel)
-output_image_path = './photos/output.jpg'  # Path to save the resulting image
+background_image_path = '../photos/template.jpg'  # Path to the background image
+insert_image_path = '../photos/item1.png'  # Path to the image to be inserted (with alpha channel)
+output_image_path = '../photos/output.jpg'  # Path to save the resulting image
 new_size = (200, 200)  # New size for the insert image
 insert_position = (100, 100)  # Coordinates to paste the smaller image
 blend_mode = "dissolve"  # Specify the desired blending mode ("dissolve", "transparent", or "normal")

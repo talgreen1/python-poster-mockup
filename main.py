@@ -2,7 +2,7 @@
 import typer
 from typing_extensions import Annotated
 
-from image_utils import insert_image_to_mockup
+from image_utils import insert_image_to_mockup, insert_images_to_mockup
 from placeholder import Placeholder
 from tag_utils import get_placeholders, write_placeholders
 
@@ -67,22 +67,27 @@ def add_image_to_mockup(mockup_path: Annotated[str, typer.Option("--mockup-path"
                                                                   help="The index of the placeholder inside the mockup path, incase there are more than one placeholder")] = 0,
                         ):
     placeholders = get_placeholders(mockup_path)
-    insert_image_to_mockup(mock_image_path=mockup_path, insert_image_path=image_path, placeholder=placeholders[mockup_index],
+    insert_image_to_mockup(mock_image_path=mockup_path, insert_image_path=image_path,
+                           placeholder=placeholders[mockup_index],
                            output_image_path=output_image_path)
 
 
 # if __name__ == "__main__":
 #     app()
 
-background_image_path = './photos/template.jpg'  # Path to the background image
-insert_image_path = './photos/item1.png'  # Path to the image to be inserted (with alpha channel)
-output_image_path = './photos/output.jpg'  # Path to save the resulting image
-
+# background_image_path = './photos/template.jpg'  # Path to the background image
+# insert_image_path = './photos/item1.png'  # Path to the image to be inserted (with alpha channel)
+# output_image_path = './photos/output.jpg'  # Path to save the resulting image
+#
 # add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
 #                     output_image_path="./photos/output.jpg")
-
-print_placeholders(u'./photos/template.png')
-set_placeholders(u'./photos/template.png', '259,286,445,630;906,286,445,630')
+#
+# print_placeholders(u'./photos/template.png')
+# set_placeholders(u'./photos/template.png', '259,286,445,630;906,286,445,630')
 # add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
 #                     output_image_path="./photos/output.jpg", mockup_index=1)
 
+
+insert_images_to_mockup(mock_image_path='./photos/template.jpg',
+                        insert_images_path=['./photos/item1.png', './photos/item2.png'],
+                        output_image_path="./photos/output.jpg")

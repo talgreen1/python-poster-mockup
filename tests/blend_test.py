@@ -3,7 +3,7 @@ import numpy
 from blend_modes import soft_light
 
 # Import background image
-background_img_raw = Image.open('./photos/template.rgba')  # RGBA image
+background_img_raw = Image.open('../photos/template.rgba')  # RGBA image
 # background_img_raw.putalpha(1)
 background_img = numpy.array(background_img_raw)  # Inputs to blend_modes need to be numpy arrays.
 
@@ -11,7 +11,7 @@ background_img_float = background_img.astype(float)  # Inputs to blend_modes nee
 
 
 # Import foreground image
-foreground_img_raw = Image.open('./photos/item1.png') # RGBA image
+foreground_img_raw = Image.open('../photos/item1.png') # RGBA image
 foreground_img = numpy.array(foreground_img_raw)  # Inputs to blend_modes need to be numpy arrays.
 foreground_img_float = foreground_img.astype(float)  # Inputs to blend_modes need to be floats.
 

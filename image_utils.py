@@ -32,6 +32,7 @@ def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_i
         return
 
     for placeholder in placeholders:
+        print('> In for')
         if not insert_images_path:
             break
 

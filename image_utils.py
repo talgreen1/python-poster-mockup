@@ -24,6 +24,7 @@ def insert_image_to_mockup(mock_image_path, insert_image_path, output_image_path
 
 
 def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_image_path):
+    print('> In insert_images_to_mockup')
     placeholders = get_placeholders(mock_image_path)
     background_image = Image.open(mock_image_path)
 

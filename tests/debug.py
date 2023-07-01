@@ -1,4 +1,15 @@
-lst = ['a','c','d']
+lst = [1,2,3,4,5]
 
-for idx, x in enumerate(lst):
-    print(idx, x)
+def get_out(l):
+    l.pop(0)
+
+
+def t(l):
+    print(l)
+    get_out(l)
+    print(l)
+    get_out(l)
+    print(l)
+
+
+t(lst)

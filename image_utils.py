@@ -61,7 +61,7 @@ def insert_images_to_mockups(mock_images_folder: [str],
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index+1))
         insert_images_to_mockup(mock_image, insert_images, output_image_full_name)
 
-#######test
+
 
 
 

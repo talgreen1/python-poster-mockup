@@ -81,8 +81,8 @@ output_image_path = './photos/output.jpg'  # Path to save the resulting image
 # add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
 #                     output_image_path="./photos/output.jpg")
 
-# print_placeholder(u'./photos/template.jpg')
-# set_placeholders(u'./photos/template.jpg', '259,286,445,630;906,286,445,630')
-add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
-                    output_image_path="./photos/output.jpg", mockup_index=1)
+print_placeholders(u'./photos/template.png')
+set_placeholders(u'./photos/template.png', '259,286,445,630;906,286,445,630')
+# add_image_to_mockup(mockup_path='./photos/template.jpg', image_path='./photos/item1.png',
+#                     output_image_path="./photos/output.jpg", mockup_index=1)
 

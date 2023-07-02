@@ -2,7 +2,7 @@
 import typer
 from typing_extensions import Annotated
 
-from image_utils import insert_image_to_mockup, insert_images_to_mockup
+from image_utils import insert_image_to_mockup, insert_images_to_mockup, insert_images_to_mockups
 from placeholder import Placeholder
 from tag_utils import get_placeholders, write_placeholders
 
@@ -75,26 +75,33 @@ def add_image_to_mockup(mockup_path: Annotated[str, typer.Option("--mockup-path"
 
 @app.command()
 def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--mocks-folder", "-m",
-                                                                             help="A full path to a folder that contains all the mockups images")],
-                             insert_images_folder: Annotated[str, typer.Option("--images-folder", "-i",
-                                                                               help="A full path to a folder that contains all the images to insert")],
-                             output_image_path: Annotated[str, typer.Option("--output-folder", "-o",
-                                                                            help="A full path to a folder that will hold the result images")],
-                             output_image_name_template: Annotated[str, typer.Option("--name-template", "-t",
-                                                                                     help="Name template for the result images. You can use the parameter 'counter'. For example: {counter:02d}-Mockup{counter}.jpg")],
-                             mock_images_folder_scan_recursively: Annotated[
-                                 str, typer.Option("--mocks-folder-scan-recursively", "-mr",
-                                                   help="If true, mocks folder will be scanned recursively")] = True,
-                             insert_images_folder_scan_recursively: Annotated[
-                                 str, typer.Option("--images-folder-scan-recursively", "-ir",
-                                                   help="If true, images folder will be scanned recursively")] = True
-                             ):
+                                                                          help="A full path to a folder that contains all the mockups images")],
+                          insert_images_folder: Annotated[str, typer.Option("--images-folder", "-i",
+                                                                            help="A full path to a folder that contains all the images to insert")],
+                          output_image_path: Annotated[str, typer.Option("--output-folder", "-o",
+                                                                         help="A full path to a folder that will hold the result images")],
+                          output_image_name_template: Annotated[str, typer.Option("--name-template", "-t",
+                                                                                  help="Name template for the result images. You can use the parameter 'counter'. For example: {counter:02d}-Mockup{counter}.jpg")],
+                          mock_images_folder_scan_recursively: Annotated[
+                              str, typer.Option("--mocks-folder-scan-recursively", "-mr",
+                                                help="If true, mocks folder will be scanned recursively")] = True,
+                          insert_images_folder_scan_recursively: Annotated[
+                              str, typer.Option("--images-folder-scan-recursively", "-ir",
+                                                help="If true, images folder will be scanned recursively")] = True
+                          ):
     insert_images_to_mockups(mock_images_folder,
                              insert_images_folder,
                              output_image_path,
                              output_image_name_template,
                              mock_images_folder_scan_recursively,
                              insert_images_folder_scan_recursively)
+#     print(
+#         f'''mock_images_folder {mock_images_folder}
+# insert_images_folder: {insert_images_folder}
+# output_image_path: {output_image_path}
+# output_image_name_template: {output_image_name_template}
+# mock_images_folder_scan_recursively: {mock_images_folder_scan_recursively}
+# insert_images_folder_scan_recursively: {insert_images_folder_scan_recursively}''')
 
 
 if __name__ == "__main__":

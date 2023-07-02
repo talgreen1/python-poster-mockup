@@ -74,7 +74,7 @@ def add_image_to_mockup(mockup_path: Annotated[str, typer.Option("--mockup-path"
 
 
 @app.command()
-def insert_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--mocks-folder", "-m",
+def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--mocks-folder", "-m",
                                                                              help="A full path to a folder that contains all the mockups images")],
                              insert_images_folder: Annotated[str, typer.Option("--images-folder", "-i",
                                                                                help="A full path to a folder that contains all the images to insert")],

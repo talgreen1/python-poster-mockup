@@ -67,7 +67,7 @@ def insert_images_to_mockups(mock_images_folder: [str],
 
 
 
-insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
+# insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
 
 # Example usage
 # background_image_path = './photos/template.jpg'  # Path to the background image

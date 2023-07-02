@@ -35,7 +35,7 @@ def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_i
         print('> In for')
         if not insert_images_path:
             break
-
+        print('> 2')
         insert_image_path = insert_images_path.pop(0)
         insert_image = Image.open(insert_image_path)
         insert_image_new_size = (int(placeholder.width), int(placeholder.height))
@@ -44,6 +44,8 @@ def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_i
         insert_image = insert_image.resize(insert_image_new_size)
         # insert_image_alpha = insert_image.convert("RGBA")
         background_image.paste(insert_image, insert_image_position)
+
+        print('> 3')
 
     create_folder_if_not_exists(output_image_path)
     background_image.save(output_image_path)
@@ -70,7 +72,7 @@ def insert_images_to_mockups(mock_images_folder: [str],
 
 
 
-insert_images_to_mockups('./photos/mocks', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
+insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
 
 # Example usage
 # background_image_path = './photos/template.jpg'  # Path to the background image

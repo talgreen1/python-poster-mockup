@@ -53,8 +53,9 @@ def insert_images_to_mockups(mock_images_folder: [str],
                             mock_images_folder_scan_recursively: bool = True,
                             insert_images_folder_scan_recursively: bool = True,
                             ):
-    mock_images = get_all_files(mock_images_folder, mock_images_folder_scan_recursively)
-    insert_images = get_all_files(insert_images_folder, insert_images_folder_scan_recursively)
+    mock_images = get_all_files(folder_path=mock_images_folder,
+                                recursive=mock_images_folder_scan_recursively)
+    insert_images = get_all_files(folder_path=insert_images_folder,recursive=insert_images_folder_scan_recursively)
 
     for index, mock_image in enumerate(mock_images):
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index+1))

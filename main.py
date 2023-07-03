@@ -83,10 +83,10 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
                           output_image_name_template: Annotated[str, typer.Option("--name-template", "-t",
                                                                                   help="Name template for the result images. You can use the parameter 'counter'. For example: {counter:02d}-Mockup{counter}.jpg")],
                           mock_images_folder_scan_recursively: Annotated[
-                              str, typer.Option("--mocks-folder-scan-recursively", "-mr",
+                              bool, typer.Option("--mocks-folder-scan-not-recursively", "-mocks-not-rec",
                                                 help="If true, mocks folder will be scanned recursively")] = True,
                           insert_images_folder_scan_recursively: Annotated[
-                              str, typer.Option("--images-folder-scan-recursively", "-ir",
+                              bool, typer.Option("--images-folder-scan-not-recursively", "-images-not-rec",
                                                 help="If true, images folder will be scanned recursively")] = True
                           ):
     insert_images_to_mockups(mock_images_folder,

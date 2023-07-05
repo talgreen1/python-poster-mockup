@@ -15,7 +15,7 @@ def subset_sum(numbers, target, partial=[], partial_sum=0):
 
 
 res = []
-for x in subset_sum([1,1,1,2,2],4):
+for x in subset_sum([1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,5,6,7,8],20):
     if x not in res:
         res.append(x)
 

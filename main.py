@@ -96,8 +96,24 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
                               bool, typer.Option("--insert-images-random-order", "-images-rand/-images-no-rand",
                                                  help="If true - the images files will be used in random order")] = False,
 
+                          num_of_placeholders: Annotated[
+                              str, typer.Option("--num-of-placeholders", "-pn",
+                                                help="Use this param to indicate which mock images to use, "
+                                                     "based on the number of placeholders in them. For example: \"1,2\": "
+                                                     "Will use only mocks that have 1 or 2 placeholders in them.")] = None,
+
+                          exact_num_of_placeholders: Annotated[
+                              str, typer.Option("--exact-num-of-placeholders", "-epn",
+                                                help="Use this param to indicate exactly which mock images to use, "
+                                                     "based on the number of placeholders in them. For example: \"1,2\": "
+                                                     "Will use only mocks that have 1 or 2 placeholders in them ")] = None
 
                           ):
+    if num_of_placeholders and exact_num_of_placeholders:
+        print(
+            "You cannot use both 'num-of-placeholders' and 'exact-num-of-placeholders' You can use only one at a time")
+        return
+
     insert_images_to_mockups(mock_images_folder,
                              insert_images_folder,
                              output_image_path,
@@ -117,7 +133,7 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
 
 @app.command()
 def test(rand: Annotated[bool, typer.Option("--rand", "-r/-r-no",
-                                           help="A full path to a folder that contains all the mockups images")] = False):
+                                            help="A full path to a folder that contains all the mockups images")] = False):
     print(rand)
 
 

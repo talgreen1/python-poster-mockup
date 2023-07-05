@@ -77,11 +77,21 @@ def insert_images_to_mockups(mock_images_folder: [str],
 
     num_of_placeholders_and_mocks_map = get_dict_of_num_of_placeholders_and_mock(mock_images)
     if exact_num_of_placeholders:
-        #todo: Continue from here
+        # todo: Continue from here
+        mock_images = []
+        exact_num_of_placeholders = exact_num_of_placeholders.split(',')
+        for p in exact_num_of_placeholders:
+            try:
+                mock_images.append(
+                    num_of_placeholders_and_mocks_map[int(p)].pop(0)
+                )
+            except Exception as e:
+                print(f'Unable to find mock image with {p} placeholders in it')
 
     for index, mock_image in enumerate(mock_images):
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index + 1))
         insert_images_to_mockup(mock_image, insert_images, output_image_full_name)
+
 
 # insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
 

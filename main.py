@@ -122,7 +122,9 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
         mock_images_folder_scan_recursively=mock_images_folder_scan_recursively,
         insert_images_folder_scan_recursively=insert_images_folder_scan_recursively,
         mock_images_random_order=mock_images_random_order,
-        insert_images_random_order=insert_images_random_order
+        insert_images_random_order=insert_images_random_order,
+        num_of_placeholders=num_of_placeholders,
+        exact_num_of_placeholders=exact_num_of_placeholders
     )
 
 

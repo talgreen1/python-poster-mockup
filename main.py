@@ -84,10 +84,19 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
                                                                                   help="Name template for the result images. You can use the parameter 'counter'. For example: {counter:02d}-Mockup{counter}.jpg")],
                           mock_images_folder_scan_recursively: Annotated[
                               bool, typer.Option("--mocks-folder-scan-not-recursively", "-mocks-not-rec",
-                                                help="If true, mocks folder will be scanned recursively")] = True,
+                                                 help="If true, mocks folder will be scanned recursively")] = True,
                           insert_images_folder_scan_recursively: Annotated[
                               bool, typer.Option("--images-folder-scan-not-recursively", "-images-not-rec",
-                                                help="If true, images folder will be scanned recursively")] = True
+                                                 help="If true, images folder will be scanned recursively")] = True,
+
+                          mock_images_random_order: Annotated[
+                              bool, typer.Option("--mocks-images-random-order", "-mocks-rand/-mocks-no-rand",
+                                                 help="If true - the mock files will be used in random order")] = False,
+                          insert_images_random_order: Annotated[
+                              bool, typer.Option("--insert-images-random-order", "-images-rand/-images-no-rand",
+                                                 help="If true - the images files will be used in random order")] = False,
+
+
                           ):
     insert_images_to_mockups(mock_images_folder,
                              insert_images_folder,
@@ -95,6 +104,8 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
                              output_image_name_template,
                              mock_images_folder_scan_recursively,
                              insert_images_folder_scan_recursively)
+
+
 #     print(
 #         f'''mock_images_folder {mock_images_folder}
 # insert_images_folder: {insert_images_folder}
@@ -102,6 +113,12 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
 # output_image_name_template: {output_image_name_template}
 # mock_images_folder_scan_recursively: {mock_images_folder_scan_recursively}
 # insert_images_folder_scan_recursively: {insert_images_folder_scan_recursively}''')
+
+
+@app.command()
+def test(rand: Annotated[bool, typer.Option("--rand", "-r/-r-no",
+                                           help="A full path to a folder that contains all the mockups images")] = False):
+    print(rand)
 
 
 if __name__ == "__main__":

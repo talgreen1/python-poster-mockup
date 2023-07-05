@@ -61,6 +61,10 @@ def get_placeholders(image_path: str):
         return None
 
 
+def get_number_of_placeholders(image_path: str):
+    return len(get_placeholders(image_path))
+
+
 def remove_placeholders_in_comment_text(comment: str):
     text_to_del = find_placeholders_in_comment_text(comment=comment)
     return comment.replace(text_to_del, '').replace(PLACEHOLDERS_TEMPLATE_START + PLACEHOLDERS_TEMPLATE_END, '')

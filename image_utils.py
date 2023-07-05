@@ -5,7 +5,7 @@ from PIL import Image
 
 from file_utils import get_all_files, create_folder_if_not_exists
 from placeholder import Placeholder
-from tag_utils import get_placeholders
+from tag_utils import get_placeholders, get_number_of_placeholders
 from os import listdir
 from os.path import isfile, join
 
@@ -46,27 +46,38 @@ def insert_images_to_mockup(mock_image_path, insert_images_path: [str], output_i
     background_image.save(output_image_path)
 
 
+def get_dict_of_num_of_placeholders_and_mock(mock_images):
+    res = {}
+    for m in mock_images:
+        num_of_placeholders = get_number_of_placeholders(m)
+        if num_of_placeholders in res:
+            res[num_of_placeholders].append(m)
+        else:
+            res[num_of_placeholders] = [m]
+    return res
+
+
 def insert_images_to_mockups(mock_images_folder: [str],
-                            insert_images_folder: [str],
-                            output_image_path: str,
-                            output_image_name_template: str,
-                            mock_images_folder_scan_recursively: bool = True,
-                            insert_images_folder_scan_recursively: bool = True,
-                            ):
+                             insert_images_folder: [str],
+                             output_image_path: str,
+                             output_image_name_template: str,
+                             mock_images_folder_scan_recursively: bool = True,
+                             insert_images_folder_scan_recursively: bool = True,
+                             mock_images_random_order: bool = False,
+                             insert_images_random_order: bool = False,
+                             num_of_placeholders: str = None,
+                             exact_num_of_placeholders: str = None
+                             ):
     mock_images = get_all_files(folder_path=mock_images_folder,
-                                recursive=mock_images_folder_scan_recursively)
-    insert_images = get_all_files(folder_path=insert_images_folder,recursive=insert_images_folder_scan_recursively)
-
+                                recursive=mock_images_folder_scan_recursively,
+                                random_order=mock_images_random_order)
+    insert_images = get_all_files(folder_path=insert_images_folder,
+                                  recursive=insert_images_folder_scan_recursively,
+                                  random_order=insert_images_random_order)
+    num_of_placeholders_and_mocks_map = get_dict_of_num_of_placeholders_and_mock(mock_images)
     for index, mock_image in enumerate(mock_images):
-        output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index+1))
+        output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index + 1))
         insert_images_to_mockup(mock_image, insert_images, output_image_full_name)
-
-
-
-
-
-
-
 
 # insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
 
@@ -80,3 +91,6 @@ def insert_images_to_mockups(mock_images_folder: [str],
 #
 # insert_image_to_mockup(background_image_path, insert_image_path, output_image_path, new_size, insert_position,
 #                         blend_mode)
+mocks = get_all_files(folder_path='./photos/mocks')
+get_dict_of_num_of_placeholders_and_mock(mocks)
+# print(mocks)

@@ -114,12 +114,16 @@ def add_images_to_mockups(mock_images_folder: Annotated[str, typer.Option("--moc
             "You cannot use both 'num-of-placeholders' and 'exact-num-of-placeholders' You can use only one at a time")
         return
 
-    insert_images_to_mockups(mock_images_folder,
-                             insert_images_folder,
-                             output_image_path,
-                             output_image_name_template,
-                             mock_images_folder_scan_recursively,
-                             insert_images_folder_scan_recursively)
+    insert_images_to_mockups(
+        mock_images_folder=mock_images_folder,
+        insert_images_folder=insert_images_folder,
+        output_image_path=output_image_path,
+        output_image_name_template=output_image_name_template,
+        mock_images_folder_scan_recursively=mock_images_folder_scan_recursively,
+        insert_images_folder_scan_recursively=insert_images_folder_scan_recursively,
+        mock_images_random_order=mock_images_random_order,
+        insert_images_random_order=insert_images_random_order
+    )
 
 
 #     print(

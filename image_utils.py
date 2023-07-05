@@ -74,7 +74,11 @@ def insert_images_to_mockups(mock_images_folder: [str],
     insert_images = get_all_files(folder_path=insert_images_folder,
                                   recursive=insert_images_folder_scan_recursively,
                                   random_order=insert_images_random_order)
+
     num_of_placeholders_and_mocks_map = get_dict_of_num_of_placeholders_and_mock(mock_images)
+    if exact_num_of_placeholders:
+        #todo: Continue from here
+
     for index, mock_image in enumerate(mock_images):
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index + 1))
         insert_images_to_mockup(mock_image, insert_images, output_image_full_name)

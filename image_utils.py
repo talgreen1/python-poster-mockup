@@ -87,6 +87,7 @@ def insert_images_to_mockups(mock_images_folder: [str],
                 )
             except Exception as e:
                 print(f'Unable to find mock image with {p} placeholders in it')
+                raise  Exception(f'Unable to find mock image with {p} placeholders in it')
 
     for index, mock_image in enumerate(mock_images):
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index + 1))

@@ -106,6 +106,6 @@ def insert_images_to_mockups(mock_images_folder: [str],
 #
 # insert_image_to_mockup(background_image_path, insert_image_path, output_image_path, new_size, insert_position,
 #                         blend_mode)
-mocks = get_all_files(folder_path='./photos/mocks')
-a = get_dict_of_num_of_placeholders_and_mock(mocks)
-print(a)
+# mocks = get_all_files(folder_path='./photos/mocks')
+# a = get_dict_of_num_of_placeholders_and_mock(mocks)
+# print(a)

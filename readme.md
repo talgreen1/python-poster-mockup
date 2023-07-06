@@ -14,8 +14,8 @@ python ./main.py set-placeholders -i "\\GreenNas\Backup\Etsy\Mockups Template\3x
 
 python ./main.py add-images-to-mockups -m "\\GreenNas\Backup\Etsy\Mockups Template\3x4 - With Placeholders\Babies" -i "./photos/items" -o "./photos/output" -t "{counter:02d}-Mockup{counter}.jpg"  -mocks-not-rec
 python ./main.py add-images-to-mockups -m "\\GreenNas\Backup\Etsy\Mockups Template\3x4 - With Placeholders\Babies\t" -i "./photos/items" -o "./photos/output" -t "{counter:02d}-Mockup{counter}.jpg"
+python ./main.py add-images-to-mockups -m "./photos/mocks" -i "./photos/items" -o "./photos/output" -t "{counter:02d}-Mockup{counter}.jpg" --exact-num-of-placeholders "1,2,1"
 
 
-add-images-to-mockups -m "./photos/mocks" -i "./photos/items" -o "./photos/output" -t "{counter:02d}-Mockup{counter}.jpg" -epn "1,2,1"
 
 python ./main.py add-images-to-mockups -m mm -i ii -o oo -t tt

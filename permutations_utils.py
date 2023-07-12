@@ -31,6 +31,8 @@ def find_list_with_most_uniques(list_of_lists):
 
 def get_most_unique_subset(numbers, target):
     subsets = get_unique_subsets(numbers, target)
+    if not subsets:
+        raise Exception(f'Unable to find subsets for the numbers {numbers} and the target {target}')
     return find_list_with_most_uniques(subsets)
 
 

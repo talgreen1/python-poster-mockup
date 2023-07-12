@@ -4,6 +4,7 @@ from PIL import ImageChops
 from PIL import Image
 
 from file_utils import get_all_files, create_folder_if_not_exists
+from permutations_utils import get_most_unique_subset
 from placeholder import Placeholder
 from tag_utils import get_placeholders, get_number_of_placeholders
 from os import listdir
@@ -87,7 +88,7 @@ def insert_images_to_mockups(mock_images_folder: [str],
                 )
             except Exception as e:
                 print(f'Unable to find mock image with {p} placeholders in it')
-                raise  Exception(f'Unable to find mock image with {p} placeholders in it')
+                raise Exception(f'Unable to find mock image with {p} placeholders in it')
     elif num_of_placeholders:
         num_of_placeholders_and_mocks_map_temp = {}
         num_of_placeholders = num_of_placeholders.split(',')
@@ -95,13 +96,23 @@ def insert_images_to_mockups(mock_images_folder: [str],
             if int(p) in num_of_placeholders_and_mocks_map:
                 num_of_placeholders_and_mocks_map_temp[int(p)] = num_of_placeholders_and_mocks_map[int(p)]
 
+        list_of_num_of_placeholdes_to_use = []
+        for k, v in num_of_placeholders_and_mocks_map_temp.items():
+            list_of_num_of_placeholdes_to_use.extend(','.join(str(k) * len(v)).split(','))
+        list_of_num_of_placeholdes_to_use = [int(i) for i in list_of_num_of_placeholdes_to_use]
 
-    print(num_of_placeholders_and_mocks_map_temp)
+        final_placeholders_numbers_to_use = get_most_unique_subset(list_of_num_of_placeholdes_to_use,
+                                                                   len(insert_images))
+
+        mock_images = []
+        for placeholder_number in final_placeholders_numbers_to_use:
+            mock_images.append(num_of_placeholders_and_mocks_map[int(placeholder_number)].pop(0))
+
+        print(mock_images)
 
     for index, mock_image in enumerate(mock_images):
         output_image_full_name = os.path.join(output_image_path, output_image_name_template.format(counter=index + 1))
         insert_images_to_mockup(mock_image, insert_images, output_image_full_name)
-
 
 # insert_images_to_mockups('\\\\GreenNas\\Backup\\Etsy\\Mockups Template\\3x4 - With Placeholders\\Babies', './photos/items', './photos/output', '{counter:02d}-Mockup{counter}.jpg')
 

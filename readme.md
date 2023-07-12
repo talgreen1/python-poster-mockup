@@ -21,3 +21,7 @@ python ./main.py add-images-to-mockups -m "./photos/mocks" -i "./photos/items" -
 
 
 python ./main.py add-images-to-mockups -m mm -i ii -o oo -t tt
+
+
+Contact sheets:
+https://github.com/cobanov/contact-sheet

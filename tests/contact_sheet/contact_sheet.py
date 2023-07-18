@@ -138,43 +138,44 @@ def main(output_file, image_dir=None, file_list=None, no_crop=None, img_size=0, 
 
 if __name__ == "__main__":
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description="Contact Sheet Generator")
-    parser.add_argument(
-        "output_file", type=str, help="Output file path for contact sheet"
-    )
-    parser.add_argument(
-        "--image_dir", type=str, default=None, help="Directory path containing images"
-    )
-    parser.add_argument(
-        "--file_list",
-        type=str,
-        default=None,
-        help="Path to the file list (filelist.txt) if available",
-    )
-    parser.add_argument(
-        "--img-size",
-        type=int,
-        help="Contact sheet image size",
-        default=0)
-    parser.add_argument(
-        "--no-crop",
-        help="No crop for generate contact sheet",
-        default=None,
-        action="store_true")
-    parser.add_argument(
-        "--heic_to",
-        type=str,
-        default=None,
-        help="convert .HEIC images to desired( .jpg, .png)")
-    parser.add_argument(
-        "--shuffle",
-        help="Shuffle thumbnail images",
-        default=None,
-        action="store_true")
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description="Contact Sheet Generator")
+    # parser.add_argument(
+    #     "output_file", type=str, help="Output file path for contact sheet"
+    # )
+    # parser.add_argument(
+    #     "--image_dir", type=str, default=None, help="Directory path containing images"
+    # )
+    # parser.add_argument(
+    #     "--file_list",
+    #     type=str,
+    #     default=None,
+    #     help="Path to the file list (filelist.txt) if available",
+    # )
+    # parser.add_argument(
+    #     "--img-size",
+    #     type=int,
+    #     help="Contact sheet image size",
+    #     default=0)
+    # parser.add_argument(
+    #     "--no-crop",
+    #     help="No crop for generate contact sheet",
+    #     default=None,
+    #     action="store_true")
+    # parser.add_argument(
+    #     "--heic_to",
+    #     type=str,
+    #     default=None,
+    #     help="convert .HEIC images to desired( .jpg, .png)")
+    # parser.add_argument(
+    #     "--shuffle",
+    #     help="Shuffle thumbnail images",
+    #     default=None,
+    #     action="store_true")
+    # args = parser.parse_args()
 
     # Run the main function with the provided arguments
-    main(args.output_file, args.image_dir, args.file_list, args.no_crop, args.img_size, args.heic_to, args.shuffle)
+    # main(args.output_file, args.image_dir, args.file_list, args.no_crop, args.img_size, args.heic_to, args.shuffle)
+    main(output_file='./a.png', image_dir='../../photos/items/4', img_size=500, heic_arg='jpg')
 
-main(output_file='../photos/output/con.png', image_dir='../photos/items/4', img_size=500, heic_arg='jpg')
+# main(output_file='../photos/output/con.png', image_dir='../photos/items/4', img_size=500, heic_arg='jpg')
 # contract_sheet.py /path/to/images --shuffle --heic_to jpeg --img-size 500 --no-crop result.jpg

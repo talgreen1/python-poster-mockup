@@ -43,7 +43,7 @@ def create_contact_sheet(image_paths, output_file, img_size, shuffle):
     with Pool() as pool, tqdm(
             total=len(image_paths[0:img_size]), desc="Generating Thumbnails"
     ) as pbar:
-        thumbnail_size = (100, 100)  # Adjust the size as per your requirement
+        thumbnail_size = (500, 664)  # Adjust the size as per your requirement
         results = []
         for image_path in image_paths[0:img_size]:
             results.append(
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 
     # Run the main function with the provided arguments
     # main(args.output_file, args.image_dir, args.file_list, args.no_crop, args.img_size, args.heic_to, args.shuffle)
-    main(output_file='./a.png', image_dir='../../photos/items/4', img_size=500, heic_arg='jpg')
+    main(output_file='./a.png', image_dir='../../photos/items/4', no_crop=False, img_size=500, heic_arg='jpg')
 
 # main(output_file='../photos/output/con.png', image_dir='../photos/items/4', img_size=500, heic_arg='jpg')
 # contract_sheet.py /path/to/images --shuffle --heic_to jpeg --img-size 500 --no-crop result.jpg

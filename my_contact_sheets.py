@@ -11,7 +11,7 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     for image_filepath in images:
             img = Image.open(image_filepath)
             img = img.resize(500,500)
-            contact_sheet.paste(img,(x,0))
+            contact_sheet.paste(img,(0,0))
             x +=100
 
     contact_sheet.save('./my_contact_sheet.jpg')

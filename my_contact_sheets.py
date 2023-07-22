@@ -18,6 +18,9 @@ def create_contact_sheet(images_path, output_size: int = 1000):
 
             img = ImageOps.expand(img, border=border_size, fill=border_color)
 
+            shadow_offset = (10, 10)  # Adjust these values to control the offset of the shadow
+            shadow_color = (0, 0, 0, 100)  # (R, G, B, alpha) value for black color with transparency (alpha)
+
             contact_sheet.paste(img,(x,0))
             x +=100
 

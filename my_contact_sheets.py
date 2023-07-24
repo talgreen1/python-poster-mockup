@@ -5,24 +5,36 @@ from file_utils import get_all_files
 
 def create_contact_sheet(images_path, output_size: int = 1000):
     images = get_all_files(images_path)
-    contact_sheet = Image.new('RGB', (output_size, output_size),(255, 255, 255))
+    contact_sheet = Image.new('RGB', (output_size, output_size), (255, 255, 255))
 
-    x=0
+    rows = 0
+    cols = 0
+
+    margin = output_size * 0.1
+
+    if len(images) == 2:
+        rows = 1
+        cols = 2
+    thumb_height = output_size / rows - (2 * rows * margin)
+    img = Image.open(images[0])
+    thumb_width = thumb_height * img.width / img.height
+
+    x = 0
     for image_filepath in images:
-            img = Image.open(image_filepath)
-            # img = img.resize((500,500))
-            img.thumbnail((500,500), Image.Resampling.LANCZOS)
+        img = Image.open(image_filepath)
+        # img = img.resize((500,500))
+        img.thumbnail((thumb_width, thumb_height), Image.Resampling.LANCZOS)
 
-            border_size = 20  # You can adjust this value to control the width of the border
-            border_color = (255, 255, 255)  # (R, G, B) value for white color
+        # border_size = 20  # You can adjust this value to control the width of the border
+        # border_color = (255, 255, 255)  # (R, G, B) value for white color
+        #
+        # img = ImageOps.expand(img, border=border_size, fill=border_color)
 
-            img = ImageOps.expand(img, border=border_size, fill=border_color)
+        # shadow_offset = (10, 10)  # Adjust these values to control the offset of the shadow
+        # shadow_color = (0, 0, 0, 100)  # (R, G, B, alpha) value for black color with transparency (alpha)
 
-            shadow_offset = (10, 10)  # Adjust these values to control the offset of the shadow
-            shadow_color = (0, 0, 0, 100)  # (R, G, B, alpha) value for black color with transparency (alpha)
-
-            contact_sheet.paste(img,(x,0))
-            x +=100
+        contact_sheet.paste(img, (x + int(margin), 0))
+        x += 100
 
     contact_sheet.save('./my_contact_sheet.jpg')
 

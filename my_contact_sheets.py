@@ -18,23 +18,27 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     thumb_height = output_size / rows - (2 * rows * margin)
     img = Image.open(images[0])
     thumb_width = thumb_height * img.width / img.height
+    image_index = 0
+    for r in range(rows):
+        for c in range(cols):
+            print(f'<{r}:{c}')
 
-    x = 0
-    for image_filepath in images:
-        img = Image.open(image_filepath)
-        # img = img.resize((500,500))
-        img.thumbnail((thumb_width, thumb_height), Image.Resampling.LANCZOS)
-
-        # border_size = 20  # You can adjust this value to control the width of the border
-        # border_color = (255, 255, 255)  # (R, G, B) value for white color
-        #
-        # img = ImageOps.expand(img, border=border_size, fill=border_color)
-
-        # shadow_offset = (10, 10)  # Adjust these values to control the offset of the shadow
-        # shadow_color = (0, 0, 0, 100)  # (R, G, B, alpha) value for black color with transparency (alpha)
-
-        contact_sheet.paste(img, (x + int(margin), 0))
-        x += 100
+    # x = 0
+    # for image_filepath in images:
+    #     img = Image.open(image_filepath)
+    #     # img = img.resize((500,500))
+    #     img.thumbnail((thumb_width, thumb_height), Image.Resampling.LANCZOS)
+    #
+    #     # border_size = 20  # You can adjust this value to control the width of the border
+    #     # border_color = (255, 255, 255)  # (R, G, B) value for white color
+    #     #
+    #     # img = ImageOps.expand(img, border=border_size, fill=border_color)
+    #
+    #     # shadow_offset = (10, 10)  # Adjust these values to control the offset of the shadow
+    #     # shadow_color = (0, 0, 0, 100)  # (R, G, B, alpha) value for black color with transparency (alpha)
+    #
+    #     contact_sheet.paste(img, (x + int(margin), 0))
+    #     x += 100
 
     contact_sheet.save('./my_contact_sheet.jpg')
 

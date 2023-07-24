@@ -15,13 +15,20 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     if len(images) == 2:
         rows = 1
         cols = 2
-    thumb_height = output_size / rows - (2 * rows * margin)
+    thumb_height = int(output_size / rows - (2 * rows * margin))
     img = Image.open(images[0])
-    thumb_width = thumb_height * img.width / img.height
+    thumb_width = int(thumb_height * img.width / img.height)
     image_index = 0
+    x=0
     for r in range(rows):
+        y = (output_size - thumb_height) / 2
         for c in range(cols):
-            print(f'<{r}:{c}')
+            x = x+(x*thumb_width) + margin
+            img = Image.open(images[image_index])
+            img = img.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)
+            image_index += 1
+            contact_sheet.paste(img, (int(x) + int(margin), int(y)))
+
 
     # x = 0
     # for image_filepath in images:

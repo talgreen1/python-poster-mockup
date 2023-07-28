@@ -10,15 +10,23 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     rows = 0
     cols = 0
 
-    margin = output_size * 0.02
-    # margin = 10
+    # margin = output_size * 0.02
+    margin = 10
     img = Image.open(images[0])
+    num_of_images = len(images)
     if len(images) == 2:
         rows = 1
         cols = 2
+    elif len(images) == 3:
+        rows = 1
+        cols = 3
 
     if cols >= rows:
-        thumb_width = int(output_size / cols - (cols * margin))
+        # thumb_width = int(output_size / cols - ((cols+1) * margin))
+
+        thumb_width = int((output_size - ((num_of_images+1) * margin)) / num_of_images)
+
+        # thumb_width = int( output_size / (len(images) + 1)       )
         thumb_height = int(thumb_width * img.height / img.width)
 
 
@@ -35,7 +43,7 @@ def create_contact_sheet(images_path, output_size: int = 1000):
             img = img.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)
             image_index += 1
             contact_sheet.paste(img, (int(x) + int(margin), int(y)))
-            x = x + (x + thumb_width) + margin
+            x = (x + thumb_width) + margin
 
 
     # x = 0
@@ -58,4 +66,4 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     contact_sheet.save('./my_contact_sheet.jpg')
 
 
-create_contact_sheet('./photos/items/4/2')
+create_contact_sheet('photos/items/2')

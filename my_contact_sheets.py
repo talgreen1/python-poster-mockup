@@ -24,20 +24,29 @@ def create_contact_sheet(images_path, output_size: int = 1000):
         rows = 2
         cols = 2
 
-    if cols >= rows:
-        thumb_width = int((output_size - ((num_of_images+1) * margin)) / num_of_images)
-        thumb_height = int(thumb_width * img.height / img.width)
+    # if cols >= rows:
+    #     thumb_width = int((output_size - ((num_of_images+1) * margin)) / num_of_images)
+    #     thumb_height = int(thumb_width * img.height / img.width)
 
-    
+    thumb_width = int((output_size - ((cols + 1) * margin)) / cols)
+    thumb_height = int(thumb_width * img.height / img.width)
 
+    if rows > 1:
+        thumb_height_1 = int((output_size - ((rows + 1) * margin)) / rows)
+        thumb_width_1 = int(thumb_height_1 * img.width / img.height)
+
+        if thumb_height_1 < thumb_height:
+            thumb_width = thumb_width_1
+            thumb_height = thumb_height_1
 
     # thumb_height = int(output_size / rows - (2 * rows * margin))
     # thumb_width = int(thumb_height * img.width / img.height)
     img = Image.open(images[0])
     image_index = 0
-    x=0
+
     for r in range(rows):
-        y = (output_size - thumb_height) / 2
+        x = 0
+        y = (output_size - (thumb_height *(r+1) )) / 2
         for c in range(cols):
             img = Image.open(images[image_index])
             img = img.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)

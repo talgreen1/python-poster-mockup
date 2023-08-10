@@ -32,9 +32,9 @@ def create_contact_sheet(images_path, output_size: int = 1000):
         cols = 2
         rows_cols = [2, 2]
     elif len(images) == 5:
-        rows = 3
+        rows = 2
         cols = 3
-        rows_cols = [2, 2,1]
+        rows_cols = [3, 2]
 
     thumb_width = int((output_size - ((cols + 1) * margin)) / cols)
     thumb_height = int(thumb_width * img.height / img.width)
@@ -85,4 +85,4 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     contact_sheet.save('./my_contact_sheet.jpg')
 
 
-create_contact_sheet('photos/items/1')
+create_contact_sheet('photos/items/5')

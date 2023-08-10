@@ -44,6 +44,8 @@ def create_contact_sheet(images_path, output_size: int = 1000):
     img = Image.open(images[0])
     image_index = 0
 
+    x_margin = (output_size - (cols * thumb_width)) / (cols + 1)
+
     for r in range(rows):
         x = 0
         y = (output_size - (thumb_height *(r+1) )) / 2
@@ -51,8 +53,8 @@ def create_contact_sheet(images_path, output_size: int = 1000):
             img = Image.open(images[image_index])
             img = img.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)
             image_index += 1
-            contact_sheet.paste(img, (int(x) + int(margin), int(y)))
-            x = (x + thumb_width) + margin
+            contact_sheet.paste(img, (int(x) + int(x_margin), int(y)))
+            x = (x + thumb_width) + x_margin
 
 
     # x = 0

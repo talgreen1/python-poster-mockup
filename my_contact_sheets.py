@@ -1,11 +1,11 @@
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageFilter
 
 from file_utils import get_all_files
 
 
 def create_contact_sheet(images_path, output_size: int = 1000, margin=0.03):
     images = get_all_files(images_path)
-    contact_sheet = Image.new('RGB', (output_size, output_size), (255, 255, 255))
+    contact_sheet = Image.new('RGBA', (output_size, output_size), (255, 255, 255))
 
     cols_per_row = []
 
@@ -53,11 +53,25 @@ def create_contact_sheet(images_path, output_size: int = 1000, margin=0.03):
             image_index += 1
             # print(f'x: {int(x) + int(x_margin)}, y:{int(y)}')
 
+            ############################################################# Add shadow
+            shadow_color = (0, 0, 0, 100)  # RGBA color for the shadow
+            shadow_offset = (10, 10)  # Offset of the shadow (x, y)
+
+            shadow_image = Image.new("RGBA", img.size, (0, 0, 0, 100))  # RGBA color and transparency
+            # contact_sheet.paste(shadow_image, (shadow_offset[0], shadow_offset[1]), shadow_image)
+
+            contact_sheet.paste(shadow_image,
+                                (int(x) + int(x_margin) + shadow_offset[0], int(y) + int(y_margin) + shadow_offset[1]),
+                                shadow_image)
+            # blurred_shadow = result_image.filter(ImageFilter.GaussianBlur(5))
+            ###################################################################
+
+
             contact_sheet.paste(img, (int(x) + int(x_margin), int(y) + int(y_margin)))
             x = (x + thumb_width) + x_margin
         y = (y + thumb_height) + y_margin
 
-    contact_sheet.save('./my_contact_sheet.jpg')
+    contact_sheet.save('./my_contact_sheet.png')
 
 
-create_contact_sheet('photos/items/5')
+create_contact_sheet('photos/items/4')

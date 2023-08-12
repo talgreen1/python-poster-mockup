@@ -54,20 +54,21 @@ def create_contact_sheet(images_path, output_size: int = 1000, margin=0.03):
             # print(f'x: {int(x) + int(x_margin)}, y:{int(y)}')
 
             ############################################################# Add shadow
-            shadow_color = (0, 0, 0, 100)  # RGBA color for the shadow
-            shadow_offset = (10, 10)  # Offset of the shadow (x, y)
+            # Create a shadow image
+            shadow = Image.new('RGBA', img.size, (0, 0, 0, 128))  # Adjust shadow color and transparency as needed
 
-            shadow_image = Image.new("RGBA", img.size, (0, 0, 0, 100))  # RGBA color and transparency
-            # contact_sheet.paste(shadow_image, (shadow_offset[0], shadow_offset[1]), shadow_image)
-            shadow_image = shadow_image.filter(ImageFilter.GaussianBlur(5))
-            shadow_image = Image.alpha_composite(shadow_image, shadow_image)
+            # Apply Gaussian blur to the shadow image
+            shadow_blurred = shadow.filter(ImageFilter.GaussianBlur(10))  # Adjust blur radius as needed
 
+            # Paste the blurred shadow onto the contact sheet
+            contact_sheet.paste(shadow_blurred, (int(x) + int(x_margin) + 10, int(y) + int(y_margin) + 10))
 
-            contact_sheet.paste(shadow_image,
-                                (int(x) + int(x_margin) + shadow_offset[0], int(y) + int(y_margin) + shadow_offset[1]),
-                                shadow_image)
-            blurred_shadow = contact_sheet.filter(ImageFilter.GaussianBlur(5))
-            # contact_sheet = Image.alpha_composite(contact_sheet, blurred_shadow)
+            # Paste the original image onto the contact sheet
+            # contact_sheet.paste(img, (x, y), img)
+
+            # Display or save the contact sheet
+            # contact_sheet.show()
+            # contact_sheet.save('output_contact_sheet.png')  # Save the contact sheet if needed
             ###################################################################
 
 
